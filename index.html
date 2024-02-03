@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo.css">
+    <title>FORMULARIO</title>
+</head>
+
+<body>
+    <div class="div" id="REPIT" action="formulario.php" method="post">
+        <!-- Nombres -->
+        <label for="nombres">Nombres</label>
+        <input type="text" name="nombres" id="nombres" placeholder="digite sus nombres" required>
+        <br>
+
+        <!-- Apellidos -->
+        <label for="apellidos">Apellidos</label>
+        <input type="text" name="apellidos" id="apellidos" placeholder="digite sus apellidos" required>
+        <br>
+
+        <!-- Genero -->
+        <label for="genero">Genero</label>
+        <input class="genero" type="radio" name="genero" id="masculino" value="Masculino" required>Masculino <br><br>
+        <input class="genero" type="radio" name="genero" id="femenino" value="Femenino" required>Femenino
+        <br><br>
+
+        <!-- Telefono -->
+        <label for="telefono">Telefono</label>
+        <input type="number" name="telefono" id="telefono" placeholder="Digite su telefono" required>
+        <br>
+
+        <!-- Tipo de Documento -->
+        <label for="Tipo_de_documento"> Tipo de documento</label>
+        <select name="Tipo_de_documento" id="Tipo_de_documento" required>
+            <option value="Cedula Ciudadana"> Cedula Ciudadana</option>
+            <option value="Tarjeta de Identidad"> Tarjeta de Identidad</option>
+            <option value="Cedula Extranjera"> Cedula Extranjera</option>
+            <option value="Registro Civil N"> Registro Civil N</option>
+            <option value="Pasaporte"> Pasaporte</option>
+        </select>
+        <br>
+
+        <!-- Numero de Documento -->
+        <label for="N_Documento"> Numero de Documento</label>
+        <input type="number" name="N_Documento" id="N_Documento" placeholder="Digite Documento" required>
+        <br>
+
+        <!-- Fecha de Nacimiento -->
+        <label for="F_Nacimiento">Fecha de nacimiento</label>
+        <input type="date" name="F_Nacimiento" id="F_Nacimiento" required>
+        <br>
+
+        <!-- Correo -->
+        <label for="Correo"> Correo</label>
+        <input type="email" name="Correo" id="Correo" required>
+        <br>
+
+        <!-- Boton -->
+        <button onclick="enviar()">Enviar</button>
+    </div>
+
+    <div class="div2" id="DATOS">
+
+    </div>
+
+<script>
+    function enviar() {
+        let g = "";
+        if (document.querySelector('input[name="genero"]:checked')) {
+            g = document.querySelector('input[name="genero"]:checked').value;
+        }
+
+        let datos = {
+            nombres: document.getElementById("nombres").value,
+            apellidos: document.getElementById("apellidos").value,
+            genero: g,
+            telefono: document.getElementById("telefono").value,
+            Tipo_de_documento: document.getElementById("Tipo_de_documento").value,
+            N_Documento: document.getElementById("N_Documento").value,
+            F_Nacimiento: document.getElementById("F_Nacimiento").value,
+            Correo: document.getElementById("Correo").value,
+        };
+
+        console.log(datos);
+        let data = [];
+        data.push(datos);
+        console.log(data);
+
+        pintar(data);
+    }
+
+    function pintar(data) {
+        data.forEach((item, index) => {
+            document.getElementById("DATOS").innerHTML +=
+                `<ul>
+                <li>${item.nombres}-${item.apellidos}-${item.genero}-${item.telefono}-${item.Tipo_de_documento}-${item.N_Documento}-${item.F_Nacimiento}-${item.Correo}
+                </li>
+            </ul>`;
+        });
+    }
+</script>
+</body>
+</html>
